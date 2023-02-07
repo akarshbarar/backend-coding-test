@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (db) => {
+module.exports = (db:any) => {
     const createRideTableSchema = `
         CREATE TABLE Rides
         (
