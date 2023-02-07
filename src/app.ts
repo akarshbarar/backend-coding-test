@@ -71,28 +71,9 @@ module.exports = (db:any) => {
         driver_vehicle
       ];
 
-        const result = await db.run('INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)', values);
-        const rows = await db.run('SELECT * FROM Ride');
-        console.log(rows)
+        await db.run('INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)', values);
+        const rows = await db.all('SELECT * FROM Ride');
         return res.send(rows);
-      // const result = db.run('INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)', values, function (err:any) {
-      //   if (err) {
-      //     return res.send({
-      //       error_code: 'SERVER_ERROR',
-      //       message: 'Unknown error'
-      //     });
-      //   }
-      //   db.all('SELECT * FROM Rides WHERE rideID = ?', this.lastID, (err:any, rows:any) => {
-      //     if (err) {
-      //       return res.send({
-      //         error_code: 'SERVER_ERROR',
-      //         message: 'Unknown error'
-      //       });
-      //     }
-
-      //     res.send(rows);
-      //   });
-      // });
     } catch (error) {
       return res.send({
         error_code: 'SERVER_ERROR',
